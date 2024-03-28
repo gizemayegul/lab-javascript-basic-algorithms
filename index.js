@@ -2,7 +2,7 @@
 
 const hacker1 = "Antionio";
 console.log(`The driver's name is ${hacker1}`);
-const hacker2 = "Siri";
+const hacker2 = "SiriSiriSiri";
 console.log(`The navigator's name is ${hacker2}`);
 
 // Iteration 2: Conditionals *********************************
@@ -29,6 +29,7 @@ for (let i = 0; i < hacker1.length; i++) {
   newName += hacker1[i].toUpperCase() + " ";
 }
 console.log(newName);
+
 //3.2
 
 let newName2 = "";
@@ -77,9 +78,11 @@ for (let i = 0; i < longText.length; i++) {
     words++;
   } else if (
     longText[i - 1] === " " &&
-    longText[i] === "e" &&
-    longText[i + 1] === "t" &&
-    (longText[i + 2] === " " || longText[i + 2] === ",")
+    longText[i].toLowerCase() === "e" &&
+    longText[i + 1].toLowerCase() === "t" &&
+    (longText[i + 2] === " " ||
+      longText[i + 2] === "," ||
+      longText[i + 2] === ".")
   ) {
     etCount++;
   }
@@ -91,8 +94,11 @@ console.log(
 
 //Bonus 2
 
-/* solution 1 */
-// const phraseToCheck = "put it up";
+//! * solution 1 */
+
+//! this solution is not working for the words that have special characters
+//!lexicographic order is ordering words like dictionary
+// const phraseToCheck = "step on no pets";
 
 // const checkPalindrome = (phraseToCheck) => {
 //   let word1 = "";
@@ -105,18 +111,39 @@ console.log(
 //   } else {
 //     console.log("not a palindrome");
 //   }
-//   console.log(word1);
 // };
 
-// console.log(checkPalindrome(phraseToCheck));
+// checkPalindrome(phraseToCheck);
 
-//**Another solution */
+//! Another solution */
 
-const phraseToCheck = "step on no pets";
-const reverseString = phraseToCheck.toLowerCase().split("").reverse().join("");
-if (reverseString === phraseToCheck) {
-  console.log("you have Palindrome");
+// const phraseToCheck = "put it up";
+// const reverseString = phraseToCheck.toLowerCase().split("").reverse().join("");
+// if (reverseString === phraseToCheck) {
+//   console.log("you have Palindrome");
+// } else {
+//   console.log("no palindrome");
+// }
+// console.log(phraseToCheck.split("").reverse().join(""));
+
+//!Another solution even specil characters there */ ----------------
+
+const phraseToCheck2 = "taco cat"; // acc previous it would tac ocat
+const noSpecial = phraseToCheck2.replace(/[^a-zA-Z]/g, "").toLowerCase();
+
+console.log(noSpecial, "nospecial");
+
+const noSpecialReversed = noSpecial
+  .split("")
+  .reverse()
+  .join("")
+  .replaceAll(" ", "");
+console.log(noSpecialReversed, "reversed");
+
+if (noSpecial === noSpecialReversed) {
+  console.log("you have polindrome");
 } else {
-  console.log("no palindrome");
+  console.log("No polindrome");
 }
-// console.log(phraseToCheck.split("").reverse("").join(""));
+
+//https://stackoverflow.com/questions/6555182/remove-all-special-characters-except-space-from-a-string-using-javascript
